@@ -4,6 +4,7 @@ angular.module('ticketmonster',['ngRoute','ngResource'])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/',{templateUrl:'views/landing.html',controller:'LandingPageController'})
+      .when('/Problems',{templateUrl:'views/Problems/problems.html',controller:'PerformanceProblemController'})
       .when('/Bookings',{templateUrl:'views/Booking/search.html',controller:'SearchBookingController'})
       .when('/Bookings/new',{templateUrl:'views/Booking/detail.html',controller:'NewBookingController'})
       .when('/Bookings/edit/:BookingId',{templateUrl:'views/Booking/detail.html',controller:'EditBookingController'})

@@ -1,0 +1,25 @@
+<h3>Performance Problems</h3>
+
+<style>
+  .perf-state {
+    font-style: italic;
+    font-size: 0.8em;
+  }
+  .perf-active {
+    color: green;
+  }
+  .perf-disabled {
+    color: red;
+  }
+
+</style>
+
+<div class="panel panel-default" ng-repeat="perfProblem in problems">
+  <div class="panel-body">
+    <button type="button" class="btn btn-default" style="float: right; width: 75px;" ng-click="onProblemClick(perfProblem)">{{perfProblem.active ? "Disable" : "Enable"}}</button>
+    <a style="font-size: 1.2em;">{{perfProblem.name}}
+      <span class="perf-state" ng-class="perfProblem.active ? 'perf-active' : 'perf-disabled'">[{{perfProblem.active ? "active" : "disabled"}}]</span>
+    </a>
+    <a style="color: #666; margin-top: 0px; padding-top: 4px; display: block;">{{perfProblem.description}}</a>
+  </div>
+</div>

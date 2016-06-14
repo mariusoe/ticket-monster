@@ -12,7 +12,7 @@
 </head>
 <body>
     <div id="wrap">
-    	
+
     	<div id="logo" class="hidden-xs"><div class="wrap"><h1>Ticket Monster</h1></div></div>
     	<div class="navbar">
             <div class="navbar-header">
@@ -36,7 +36,7 @@
                 </ul>
             </div>
     	</div>
-        
+
         <div class="container">
             <div class="row row-offcanvas row-offcanvas-left">
                 <!-- sidebar -->
@@ -45,6 +45,10 @@
                         <img class="hidden-xs img-responsive" src="img/forge-logo.png" alt="JBoss Forge"></img>
                     </a>
                     <nav class="sidebar-nav" ng-controller="NavController" role="navigation">
+											<div class="list-group">
+												<a class="list-group-item" ng-class="{active: matchesRoute('Problems')}" href="#/Problems" data-toggle="offcanvas">Performance Problems</a>
+											</div>
+
                         <div id="sidebar-entries" class="list-group">
                         	<a class="list-group-item" ng-class="{active: matchesRoute('Bookings')}" href="#/Bookings" data-toggle="offcanvas">Bookings</a>
                         	<a class="list-group-item" ng-class="{active: matchesRoute('Events')}" href="#/Events" data-toggle="offcanvas">Events</a>
@@ -69,14 +73,14 @@
             </div>
         </div>
     </div>
-    
+
     <div id="footer">
         <div class="container">
             <p>Powered by <a href="http://jboss.org/forge">Forge</a></p>
             <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
         </div>
     </div>
-    
+
     <script src="scripts/vendor/modernizr-2.8.3.min.js"></script>
     <script src="scripts/vendor/jquery-2.0.3.js"></script>
     <script src="scripts/vendor/bootstrap.js"></script>
@@ -139,5 +143,7 @@
     <script src="scripts/controllers/newVenueController.js"></script>
     <script src="scripts/controllers/searchVenueController.js"></script>
     <script src="scripts/controllers/editVenueController.js"></script>
+		<script src="scripts/controllers/performanceProblemController.js"></script>
+		<script src="scripts/services/PerformanceProblemFactory.js"></script>
 </body>
 </html>

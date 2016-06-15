@@ -9,9 +9,9 @@ package org.jboss.examples.ticketmonster.performance;
  */
 public enum EPerformanceProblem {
 
-	TestProblem("This is a test"),
+	TestProblem("This is a test problem. Nothing happens if this is active."),
 
-	AnotherProblem("This is another test!");
+	SlowBookings("This problem slows down the request that is used to get a list of all existing bookings in the system.");
 
 	/**
 	 * The description of the performance problem. This will be shown in the

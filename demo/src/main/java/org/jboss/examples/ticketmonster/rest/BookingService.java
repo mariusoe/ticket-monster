@@ -20,6 +20,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.jboss.examples.ticketmonster.model.Booking;
 import org.jboss.examples.ticketmonster.model.Performance;
@@ -28,6 +29,8 @@ import org.jboss.examples.ticketmonster.model.Section;
 import org.jboss.examples.ticketmonster.model.Ticket;
 import org.jboss.examples.ticketmonster.model.TicketCategory;
 import org.jboss.examples.ticketmonster.model.TicketPrice;
+import org.jboss.examples.ticketmonster.performance.EPerformanceProblem;
+import org.jboss.examples.ticketmonster.performance.PerformanceProblemService;
 import org.jboss.examples.ticketmonster.service.AllocatedSeats;
 import org.jboss.examples.ticketmonster.service.SeatAllocationService;
 import org.jboss.examples.ticketmonster.util.MultivaluedHashMap;
@@ -61,9 +64,25 @@ public class BookingService extends BaseEntityService<Booking> {
     @Inject @Created
     private Event<Booking> newBookingEvent;
     
-    public BookingService() {
-        super(Booking.class);
-    }
+    @Inject
+	private PerformanceProblemService problemService;
+
+	public BookingService() {
+		super(Booking.class);
+	}
+
+	@Override
+	public List<Booking> getAll(UriInfo uriInfo) {
+		// injected performance problem
+		if (problemService.isActive(EPerformanceProblem.SlowBookings)) {
+			try {
+				Thread.sleep((long) (500 + Math.random() * 500));
+			} catch (InterruptedException e) {
+			}
+		}
+		
+		return super.getAll(uriInfo);
+	}
     
     @DELETE
     public Response deleteAllBookings() {

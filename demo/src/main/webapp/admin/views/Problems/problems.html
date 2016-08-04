@@ -14,7 +14,7 @@
 
 </style>
 
-<div class="panel panel-default" ng-repeat="perfProblem in problems">
+<div class="panel panel-default" ng-repeat="perfProblem in problems | orderBy:'name'">
   <div class="panel-body">
     <button type="button" class="btn btn-default" style="float: right; width: 75px;" ng-click="onProblemClick(perfProblem)">{{perfProblem.active ? "Disable" : "Enable"}}</button>
     <a style="font-size: 1.2em;">{{perfProblem.name}}

@@ -17,8 +17,8 @@ import org.jboss.examples.ticketmonster.util.MultivaluedHashMap;
 import org.jboss.examples.ticketmonster.util.qualifier.BotMessage;
 
 /**
- * A Bot service that acts as a Facade for the Bot, providing methods to control the Bot state as well as to obtain the current
- * state of the Bot.
+ * A Bot service that acts as a Facade for the Bot, providing methods to control the Bot state as
+ * well as to obtain the current state of the Bot.
  * 
  * @author Christian Sadilek <csadilek@redhat.com>
  * @author Pete Muir
@@ -27,79 +27,78 @@ import org.jboss.examples.ticketmonster.util.qualifier.BotMessage;
 @Singleton
 public class BotService {
 
-    private static final int MAX_LOG_SIZE = 50;
+	private static final int MAX_LOG_SIZE = 50;
 
-    private CircularBuffer<String> log;
+	private CircularBuffer<String> log;
 
-    @Inject
-    private Bot bot;
+	@Inject
+	private Bot bot;
 
-    @Inject
-    private BookingService bookingService;
+	@Inject
+	private BookingService bookingService;
 
-    @Inject
-    private Logger logger;
+	@Inject
+	private Logger logger;
 
-    @Inject
-    @BotMessage
-    private Event<String> event;
+	@Inject
+	@BotMessage
+	private Event<String> event;
 
-    private Timer timer;
+	private Timer timer;
 
-    public BotService() {
-        log = new CircularBuffer<String>(MAX_LOG_SIZE);
-    }
+	public BotService() {
+		log = new CircularBuffer<String>(MAX_LOG_SIZE);
+	}
 
-    public void start() {
-        synchronized (bot) {
-            if (timer == null) {
-                logger.info("Starting bot");
-                timer = bot.start();
-            }
-        }
-    }
+	public void start() {
+		synchronized (bot) {
+			if (timer == null) {
+				logger.info("Starting bot");
+				timer = bot.start();
+			}
+		}
+	}
 
-    public void stop() {
-        synchronized (bot) {
-            if (timer != null) {
-                logger.info("Stopping bot");
-                bot.stop(timer);
-                timer = null;
-            }
-        }
-    }
+	public void stop() {
+		synchronized (bot) {
+			if (timer != null) {
+				logger.info("Stopping bot");
+				bot.stop(timer);
+				timer = null;
+			}
+		}
+	}
 
-    @Asynchronous
-    public void deleteAll() {
-        synchronized (bot) {
-            stop();
-            // Delete 10 bookings at a time
-            while(true) {
-                MultivaluedHashMap<String,String> params = new MultivaluedHashMap<String, String>();
-                params.add("maxResults", Integer.toString(10));
-                List<Booking> bookings = bookingService.getAll(params);
-                for (Booking booking : bookings) {
-                    bookingService.deleteBooking(booking.getId());
-                    event.fire("Deleted booking " + booking.getId() + " for "
-                            + booking.getContactEmail() + "\n");
-                }
-                if(bookings.size() < 1) {
-                    break;
-                }
-            }
-        }
-    }
+	@Asynchronous
+	public void deleteAll() {
+		synchronized (bot) {
+			stop();
+			// Delete 10 bookings at a time
+			while (true) {
+				MultivaluedHashMap<String, String> params = new MultivaluedHashMap<String, String>();
+				params.add("maxResults", Integer.toString(10));
+				List<Booking> bookings = bookingService.getAll(params);
+				for (Booking booking : bookings) {
+					bookingService.deleteBooking(booking.getId());
+					event.fire("Deleted booking " + booking.getId() + " for " + booking.getContactEmail() + "\n");
+				}
+				if (bookings.size() < 1) {
+					break;
+				}
+			}
+		}
+	}
 
-    public void newBookingRequest(@Observes @BotMessage String bookingRequest) {
-        log.add(bookingRequest);
-    }
+	public void newBookingRequest(@Observes @BotMessage String bookingRequest) {
+		log.add(bookingRequest);
+	}
 
-    public List<String> fetchLog() {
-        return log.getContents();
-    }
+	public List<String> fetchLog() {
+		return log.getContents();
+	}
 
-    public boolean isBotActive() {
-        return (timer != null);
-    }
+	public boolean isBotActive() {
+		return (timer != null);
+	}
 
 }

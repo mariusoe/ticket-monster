@@ -5,8 +5,8 @@ import java.util.Date;
 import org.jboss.examples.ticketmonster.model.Performance;
 
 /**
- * Metric data for a Performance. Contains the datetime for the performance to
- * identify the performance, as well as the occupied count for the performance.
+ * Metric data for a Performance. Contains the datetime for the performance to identify the
+ * performance, as well as the occupied count for the performance.
  * 
  * @author Vineet Reynolds
  * 

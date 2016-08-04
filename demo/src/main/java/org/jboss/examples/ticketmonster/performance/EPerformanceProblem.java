@@ -14,8 +14,8 @@ public enum EPerformanceProblem {
 	SlowBookings("This problem slows down the request that is used to get a list of all existing bookings in the system.");
 
 	/**
-	 * The description of the performance problem. This will be shown in the
-	 * administration interface.
+	 * The description of the performance problem. This will be shown in the administration
+	 * interface.
 	 */
 	private final String description;
 

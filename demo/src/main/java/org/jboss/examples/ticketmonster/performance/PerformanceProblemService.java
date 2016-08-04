@@ -24,8 +24,7 @@ public class PerformanceProblemService {
 	private Map<EPerformanceProblem, PerformanceProblem> problemMap;
 
 	/**
-	 * Returns the existing performance problems which are stored in the
-	 * {@link #problemMap}.
+	 * Returns the existing performance problems which are stored in the {@link #problemMap}.
 	 * 
 	 * @return returns all existing performance problems
 	 */
@@ -46,14 +45,11 @@ public class PerformanceProblemService {
 	}
 
 	/**
-	 * Returns the {@link PerformanceProblem} related to the given
-	 * {@link EPerformanceProblem}.
+	 * Returns the {@link PerformanceProblem} related to the given {@link EPerformanceProblem}.
 	 * 
 	 * @param problem
-	 *            {@link EPerformanceProblem} of the desired
-	 *            {@link PerformanceProblem}
-	 * @return the {@link PerformanceProblem} related to the given
-	 *         {@link EPerformanceProblem}
+	 *            {@link EPerformanceProblem} of the desired {@link PerformanceProblem}
+	 * @return the {@link PerformanceProblem} related to the given {@link EPerformanceProblem}
 	 */
 	public PerformanceProblem getPerformanceProblem(EPerformanceProblem problem) {
 		return problemMap.get(problem);
@@ -63,8 +59,7 @@ public class PerformanceProblemService {
 	 * Returns whether the specified performance problem is active.
 	 * 
 	 * @param problem
-	 *            {@link EPerformanceProblem} of the desired
-	 *            {@link PerformanceProblem}
+	 *            {@link EPerformanceProblem} of the desired {@link PerformanceProblem}
 	 * @return <code>true</code> if the problem is active
 	 */
 	public boolean isActive(EPerformanceProblem problem) {

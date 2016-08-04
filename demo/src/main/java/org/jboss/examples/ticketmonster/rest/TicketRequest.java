@@ -13,32 +13,32 @@ import org.jboss.examples.ticketmonster.model.TicketPrice;
  */
 public class TicketRequest {
 
-    private long ticketPrice;
+	private long ticketPrice;
 
-    private int quantity;
+	private int quantity;
 
-    public TicketRequest() {
-        // Empty constructor
-    }
+	public TicketRequest() {
+		// Empty constructor
+	}
 
-    public TicketRequest(TicketPrice ticketPrice, int quantity) {
-        this.ticketPrice = ticketPrice.getId();
-        this.quantity = quantity;
-    }
+	public TicketRequest(TicketPrice ticketPrice, int quantity) {
+		this.ticketPrice = ticketPrice.getId();
+		this.quantity = quantity;
+	}
 
-    public long getTicketPrice() {
-        return ticketPrice;
-    }
+	public long getTicketPrice() {
+		return ticketPrice;
+	}
 
-    public void setTicketPrice(long ticketPrice) {
-        this.ticketPrice = ticketPrice;
-    }
+	public void setTicketPrice(long ticketPrice) {
+		this.ticketPrice = ticketPrice;
+	}
 
-    public int getQuantity() {
-        return quantity;
-    }
+	public int getQuantity() {
+		return quantity;
+	}
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 }

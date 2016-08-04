@@ -7,22 +7,22 @@ import org.jboss.examples.ticketmonster.model.Section;
 /**
  * A utility comparator for sections, sorting them by id
  *
-* @author Marius Bogoevici
-*/
+ * @author Marius Bogoevici
+ */
 public class SectionComparator implements Comparator<Section> {
 
-    private static final SectionComparator INSTANCE = new SectionComparator();
+	private static final SectionComparator INSTANCE = new SectionComparator();
 
-    private SectionComparator(){
-    }
+	private SectionComparator() {
+	}
 
-    public static SectionComparator instance() {
-        return INSTANCE;
-    }
+	public static SectionComparator instance() {
+		return INSTANCE;
+	}
 
-    @Override
-    public int compare(Section section, Section otherSection) {
-        return section.getId().compareTo(otherSection.getId());
-    }
+	@Override
+	public int compare(Section section, Section otherSection) {
+		return section.getId().compareTo(otherSection.getId());
+	}
 
 }

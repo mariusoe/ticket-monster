@@ -13,7 +13,7 @@ import javax.inject.Qualifier;
  * @author Christian Sadilek <csadilek@redhat.com>
  */
 @Qualifier
-@Target({ElementType.FIELD,ElementType.PARAMETER,ElementType.METHOD,ElementType.TYPE})
+@Target({ ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD, ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Created {
 

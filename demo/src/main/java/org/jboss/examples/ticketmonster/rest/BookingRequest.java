@@ -9,7 +9,7 @@ import org.jboss.examples.ticketmonster.model.Performance;
 
 /**
  * <p>
- * A {@link BookingRequest} is populated with unmarshalled JSON data, and handed to 
+ * A {@link BookingRequest} is populated with unmarshalled JSON data, and handed to
  * {@link BookingService#createBooking(BookingRequest)}.
  * </p>
  * 
@@ -19,62 +19,62 @@ import org.jboss.examples.ticketmonster.model.Performance;
  */
 public class BookingRequest {
 
-    private List<TicketRequest> ticketRequests = new ArrayList<TicketRequest>();
-    private long performance;
-    private String email;
-    
-    public BookingRequest() {
-        // Empty constructor for JAXB
-    }
+	private List<TicketRequest> ticketRequests = new ArrayList<TicketRequest>();
+	private long performance;
+	private String email;
 
-    public BookingRequest(Performance performance, String email) {
-        this.performance = performance.getId();
-        this.email = email;
-    }
+	public BookingRequest() {
+		// Empty constructor for JAXB
+	}
 
-    public List<TicketRequest> getTicketRequests() {
-        return ticketRequests;
-    }
+	public BookingRequest(Performance performance, String email) {
+		this.performance = performance.getId();
+		this.email = email;
+	}
 
-    public void setTicketRequests(List<TicketRequest> ticketRequests) {
-        this.ticketRequests = ticketRequests;
-    }
-    
-    public BookingRequest addTicketRequest(TicketRequest ticketRequest) {
-        ticketRequests.add(ticketRequest);
-        return this;
-    }
+	public List<TicketRequest> getTicketRequests() {
+		return ticketRequests;
+	}
 
-    public long getPerformance() {
-        return performance;
-    }
+	public void setTicketRequests(List<TicketRequest> ticketRequests) {
+		this.ticketRequests = ticketRequests;
+	}
 
-    public void setPerformance(long performance) {
+	public BookingRequest addTicketRequest(TicketRequest ticketRequest) {
+		ticketRequests.add(ticketRequest);
+		return this;
+	}
 
-        this.performance = performance;
-    }
+	public long getPerformance() {
+		return performance;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setPerformance(long performance) {
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+		this.performance = performance;
+	}
 
-    /**
-     * Utility method - computes the unique price category ids in the request
-     *
-     * @return
-     */
-    Set<Long> getUniquePriceCategoryIds() {
-        Set<Long> priceCategoryIds = new HashSet<Long>();
-        for (TicketRequest ticketRequest : getTicketRequests()) {
-            if (priceCategoryIds.contains(ticketRequest.getTicketPrice())) {
-                throw new RuntimeException("Duplicate price category id");
-            }
-            priceCategoryIds.add(ticketRequest.getTicketPrice());
-        }
-        return priceCategoryIds;
-    }
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * Utility method - computes the unique price category ids in the request
+	 *
+	 * @return
+	 */
+	Set<Long> getUniquePriceCategoryIds() {
+		Set<Long> priceCategoryIds = new HashSet<Long>();
+		for (TicketRequest ticketRequest : getTicketRequests()) {
+			if (priceCategoryIds.contains(ticketRequest.getTicketPrice())) {
+				throw new RuntimeException("Duplicate price category id");
+			}
+			priceCategoryIds.add(ticketRequest.getTicketPrice());
+		}
+		return priceCategoryIds;
+	}
 }

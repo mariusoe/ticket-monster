@@ -1,8 +1,8 @@
 package org.jboss.examples.ticketmonster.performance;
 
 /**
- * This class is a container for the state of the performance problems. Also, it
- * will be used as model for the JSON object that are send to the front-end.
+ * This class is a container for the state of the performance problems. Also, it will be used as
+ * model for the JSON object that are send to the front-end.
  * 
  * @author Marius Oehler
  *

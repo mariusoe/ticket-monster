@@ -15,8 +15,7 @@ import org.jboss.examples.ticketmonster.performance.PerformanceProblem;
 import org.jboss.examples.ticketmonster.performance.PerformanceProblemService;
 
 /**
- * Endpoint class that provides the REST interface to manage the performance
- * problems.
+ * Endpoint class that provides the REST interface to manage the performance problems.
  * 
  * @author Marius Oehler
  *
@@ -44,8 +43,7 @@ public class PerformanceProblemEndpoint {
 	 * Service to update the active state of the specified performance problem.
 	 * 
 	 * @param updateProblem
-	 *            the problem to update and the new value for the
-	 *            <code>active</code> property
+	 *            the problem to update and the new value for the <code>active</code> property
 	 * @return the current status of all performance problems
 	 */
 	@POST

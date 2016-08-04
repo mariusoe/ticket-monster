@@ -15,27 +15,28 @@ import org.jboss.examples.ticketmonster.service.MediaManager;
 @Path("/media")
 /**
  * <p>
- *     This is a stateless service, we declare it as an EJB for transaction demarcation
+ * This is a stateless service, we declare it as an EJB for transaction demarcation
  * </p>
  */
 public class MediaService {
-    
-    @Inject
-    private MediaManager mediaManager;
-    
-    @Inject EntityManager entityManager;
 
-    @GET
-    @Path("/cache/{cachedFileName:\\S*}")
-    @Produces("*/*")
-    public File getCachedMediaContent(@PathParam("cachedFileName") String cachedFileName) {
-        return mediaManager.getCachedFile(cachedFileName);
-    }
+	@Inject
+	private MediaManager mediaManager;
 
-    @GET
-    @Path("/{id:\\d*}")
-    @Produces("*/*")
-    public File getMediaContent(@PathParam("id") Long id) {
-        return mediaManager.getCachedFile(mediaManager.getPath(entityManager.find(MediaItem.class, id)).getUrl());
-    }
+	@Inject
+	EntityManager entityManager;
+
+	@GET
+	@Path("/cache/{cachedFileName:\\S*}")
+	@Produces("*/*")
+	public File getCachedMediaContent(@PathParam("cachedFileName") String cachedFileName) {
+		return mediaManager.getCachedFile(cachedFileName);
+	}
+
+	@GET
+	@Path("/{id:\\d*}")
+	@Produces("*/*")
+	public File getMediaContent(@PathParam("id") Long id) {
+		return mediaManager.getCachedFile(mediaManager.getPath(entityManager.find(MediaItem.class, id)).getUrl());
+	}
 }

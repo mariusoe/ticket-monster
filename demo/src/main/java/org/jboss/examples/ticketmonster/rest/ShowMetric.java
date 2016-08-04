@@ -9,9 +9,8 @@ import org.jboss.examples.ticketmonster.model.Performance;
 import org.jboss.examples.ticketmonster.model.Show;
 
 /**
- * Metric data for a Show. Contains the identifier for the Show to identify it,
- * in addition to the event name, the venue name and capacity, and the metric
- * data for the performances of the Show.
+ * Metric data for a Show. Contains the identifier for the Show to identify it, in addition to the
+ * event name, the venue name and capacity, and the metric data for the performances of the Show.
  * 
  * @author Vineet Reynolds
  * 
@@ -33,8 +32,7 @@ class ShowMetric {
 		this.performances = convertFrom(show.getPerformances(), occupiedCounts);
 	}
 
-	private List<PerformanceMetric> convertFrom(Set<Performance> performances,
-			Map<Long, Long> occupiedCounts) {
+	private List<PerformanceMetric> convertFrom(Set<Performance> performances, Map<Long, Long> occupiedCounts) {
 		List<PerformanceMetric> result = new ArrayList<PerformanceMetric>();
 		for (Performance performance : performances) {
 			Long occupiedCount = occupiedCounts.get(performance.getId());

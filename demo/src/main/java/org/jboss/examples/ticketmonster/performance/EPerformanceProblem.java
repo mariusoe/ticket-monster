@@ -9,11 +9,13 @@ package org.jboss.examples.ticketmonster.performance;
  */
 public enum EPerformanceProblem {
 
-	TestProblem("This is a test problem. Nothing happens if this is active."),
-
 	SlowVenues("This problem slows down the request which is used to receive particular venues."),
 	
-	SlowBookings("This problem slows down the request that is used to get a list of all existing bookings in the system.");
+	SlowBookings("This problem slows down the request that is used to get a list of all existing bookings in the system."),
+	
+	CreepingEvents("Increases the invocation sequence duration over a period of time."),
+	
+	ExcessiveDatabaseQueries("Using an excessive amount of database queries to calculate the total amount spent on tickets.");
 
 	/**
 	 * The description of the performance problem. This will be shown in the administration

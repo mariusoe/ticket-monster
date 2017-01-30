@@ -20,7 +20,13 @@ define([
             paginator.totalPageCount = Math.floor(this.options.count/this.options.pageSize)
                                        + (this.options.count%this.options.pageSize == 0? 0 : 1);
             paginator.currentPage = this.options.page;
-            utilities.applyTemplate($(this.el), bookingTableTemplate, {model:this.model.bookings, paginator:paginator});
+            
+            var self = this;
+            $.get(config.baseUrl + "rest/bookings/total",
+                    function (data) {
+                    	utilities.applyTemplate($(self.el), bookingTableTemplate, {model:self.model.bookings, paginator:paginator, totalAmount:data.total});
+                    });
+            
             return this;
         },
         refreshPage: function(event) {
@@ -40,6 +46,7 @@ define([
             options.maxResults = this.options.pageSize;
 
             var self = this;
+            
             $.get(
                 config.baseUrl + "rest/bookings/count",
                 function (data) {

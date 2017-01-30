@@ -11,10 +11,14 @@ import java.util.TreeMap;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -93,6 +97,33 @@ public class BookingService extends BaseEntityService<Booking> {
 			deleteBooking(booking.getId());
 		}
 		return Response.noContent().build();
+	}
+
+	@GET
+	@Path("/total")
+	public Response getTotalAmount() {
+		double totalAmount = 0;
+
+		// performance problem
+		if (problemService.isActive(EPerformanceProblem.ExcessiveDatabaseQueries)) {
+			List<Booking> bookings = getEntityManager().createQuery("select b from Booking b", Booking.class).getResultList();
+			
+			for (Booking booking : bookings) {
+				for (Ticket ticket : booking.getTickets()) {
+					Ticket result = getEntityManager().createQuery("select p from Ticket p where p.id = :id", Ticket.class).setParameter("id", ticket.getId()).getSingleResult();
+					if (result != null)
+						totalAmount += result.getPrice();
+				}
+			}
+		} else {
+			Double singleResult = getEntityManager().createQuery("select sum(p.price) from Ticket p", Double.class).getSingleResult();
+			if (singleResult != null)
+				totalAmount = getEntityManager().createQuery("select sum(p.price) from Ticket p", Double.class).getSingleResult();
+		}
+
+		Map<String, Double> result = new HashMap<String, Double>();
+		result.put("total", totalAmount);
+		return Response.ok().entity(result).type(MediaType.APPLICATION_JSON_TYPE).build();
 	}
 
 	/**

@@ -1,10 +1,11 @@
 package org.jboss.examples.ticketmonster.rest;
 
-import java.util.Random;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.UriInfo;
 
 import org.jboss.examples.ticketmonster.model.Venue;
 import org.jboss.examples.ticketmonster.performance.EPerformanceProblem;
@@ -30,22 +31,31 @@ public class VenueService extends BaseEntityService<Venue> {
 	@Inject
 	private PerformanceProblemService problemService;
 
-	private Random random = new Random();
-
 	public VenueService() {
 		super(Venue.class);
 	}
 
-	@Override
-	public Venue getSingleInstance(Long id) {
+	private void delay() {
 		// injected performance problem
 		if (problemService.isActive(EPerformanceProblem.SlowVenues)) {
-			try {
-				long baseline = 850L;
-				Thread.sleep(baseline + random.nextInt(150));
-			} catch (InterruptedException e) {
+			if (problemService.propability(0.9)) {
+				problemService.randomSleep(2000L, 3000L);
+			} else {
+				problemService.randomSleep(4000L, 6000L);
 			}
 		}
+	}
+
+	@Override
+	public List<Venue> getAll(UriInfo uriInfo) {
+		delay();
+
+		return super.getAll(uriInfo);
+	}
+
+	@Override
+	public Venue getSingleInstance(Long id) {
+		delay();
 
 		return super.getSingleInstance(id);
 	}

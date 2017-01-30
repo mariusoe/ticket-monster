@@ -1,5 +1,11 @@
 package org.jboss.examples.ticketmonster.performance;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
+import java.util.Date;
+
 /**
  * This class is a container for the state of the performance problems. Also, it will be used as
  * model for the JSON object that are send to the front-end.
@@ -56,6 +62,21 @@ public class PerformanceProblem {
 	 *            the isActive to set
 	 */
 	public void setActive(boolean isActive) {
+		try {
+			File dataDir = new File(System.getProperty("jboss.server.data.dir"));
+			File logFile = new File(dataDir, "anomaly.log");
+
+			if (!logFile.exists()) {
+				logFile.createNewFile();
+			}
+
+			String status = new Date() + " - " + (isActive ? "enabled" : "disabled") + " " + getName() + "\n";
+
+			Files.write(logFile.toPath(), status.getBytes(), StandardOpenOption.APPEND);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		this.isActive = isActive;
 	}
 

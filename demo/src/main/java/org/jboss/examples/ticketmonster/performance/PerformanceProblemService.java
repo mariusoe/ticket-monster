@@ -3,6 +3,7 @@ package org.jboss.examples.ticketmonster.performance;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -64,5 +65,24 @@ public class PerformanceProblemService {
 	 */
 	public boolean isActive(EPerformanceProblem problem) {
 		return problemMap.get(problem).isActive();
+	}
+
+	/**
+	 * Sleeps a random duration.
+	 * 
+	 * @param min
+	 *            minimum sleep duration
+	 * @param max
+	 *            maximum sleep duration
+	 */
+	public void randomSleep(long min, long max) {
+		try {
+			Thread.sleep(ThreadLocalRandom.current().nextLong(2000L, 3000L));
+		} catch (InterruptedException e) {
+		}
+	}
+
+	public boolean propability(double propability) {
+		return ThreadLocalRandom.current().nextDouble() < propability;
 	}
 }

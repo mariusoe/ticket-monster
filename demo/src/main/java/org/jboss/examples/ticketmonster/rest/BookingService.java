@@ -77,14 +77,18 @@ public class BookingService extends BaseEntityService<Booking> {
 		super(Booking.class);
 	}
 
+	public void slowCall() {
+		try {
+			Thread.sleep((long) (500 + Math.random() * 500));
+		} catch (InterruptedException e) {
+		}
+	}
+	
 	@Override
 	public List<Booking> getAll(UriInfo uriInfo) {
 		// injected performance problem
 		if (problemService.isActive(EPerformanceProblem.SlowBookings)) {
-			try {
-				Thread.sleep((long) (500 + Math.random() * 500));
-			} catch (InterruptedException e) {
-			}
+			slowCall();
 		}
 
 		return super.getAll(uriInfo);
